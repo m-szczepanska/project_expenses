@@ -1,5 +1,5 @@
 from django import forms
-from .models import Expense
+from .models import Expense, Category
 
 
 class ExpenseSearchForm(forms.ModelForm):
@@ -10,6 +10,7 @@ class ExpenseSearchForm(forms.ModelForm):
     class Meta:
         model = Expense
         fields = ('category', 'date',)
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

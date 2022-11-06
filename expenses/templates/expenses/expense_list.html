@@ -9,7 +9,6 @@
   {{form.as_p}}
   <button type="submit">search</button>
 </form>
-<p> {{ object_list }} </p>
 <br>
 <table border="1">
 	<caption>Expenses</caption>
@@ -30,7 +29,7 @@
 		<td>{{ obj.category|default:"-" }}</td>
 		<td>{{ obj.name|default:"-" }}</td>
 		<td>{{ obj.amount|floatformat:2 }}</td>
-		<td>{{obj.date}}</td>
+		<td>{{ obj.date }}</td>
 		<td>
 		  <a href="{% url 'expenses:expense-edit' obj.id %}">edit</a>
 		  <a href="{% url 'expenses:expense-delete' obj.id %}">delete</a>
@@ -43,8 +42,22 @@
 	{% endfor %}
 	</tbody>
 </table>
-
 {% include "_pagination.html" %}
+<hr>
+<table border="1" style="width:35%">
+	<caption>Total amount spent for expenses</caption>
+	<thead>
+	  <tr>
+		<th>amount</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr>
+		<td style="text-align: center">{{ object_list.0.total_amount_spent|floatformat:2 }}</td>
+	  </tr>
+	</tbody>
+</table>
+
 <hr>
 <table border="1">
   <caption>Summary per category</caption>

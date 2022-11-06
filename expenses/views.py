@@ -22,8 +22,6 @@ class ExpenseListView(ListView):
         form = ExpenseSearchForm(self.request.GET)
         if form.is_valid():
             category = form.cleaned_data.get('category', '')
-            name = form.cleaned_data.get('name', '').strip()
-            amount = form.cleaned_data.get('amount', '')
             date = form.cleaned_data.get('date', '')
             date_from = form.data.get('date_from', '')
             date_to = form.data.get('date_to', '')
@@ -47,7 +45,7 @@ class ExpenseListView(ListView):
             summary_per_category=summary_per_category(queryset),
             **kwargs)
 
+
 class CategoryListView(ListView):
     model = Category
     paginate_by = 5
-
