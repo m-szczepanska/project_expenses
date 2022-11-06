@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% load custom_tags %}
 
 <a href="{% url 'expenses:expense-create' %}">add</a>
 
@@ -8,21 +9,21 @@
   {{form.as_p}}
   <button type="submit">search</button>
 </form>
+<p> {{ object_list }} </p>
 <br>
 <table border="1">
 	<caption>Expenses</caption>
 	<thead>
 	  <tr>
 		<th>no.</th>
-		<th>category</th>
+		<th><a href="?{% url_replace request 'order_by' 'category' '-' %}">category</a></th>
 		<th>name</th>
 		<th>amount</th>
-		<th>date</th>
+		<th><a href="?{% url_replace request 'order_by' 'date' '-' %}">date</a></th>
 		<th>actions</th>
 	  </tr>
 	</thead>
 	<tbody>
-
 	{% for obj in object_list %}
 	  <tr>
 		<td>{{ page_obj.start_index|add:forloop.counter0 }}.</td>
