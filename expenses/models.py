@@ -17,7 +17,7 @@ class Category(models.Model):
         category_amount_sum = 0
         for amount in [item.amount for item in category_amounts_list]:
             category_amount_sum += amount
-        return int(category_amount_sum)
+        return float(category_amount_sum)
 
 
 class Expense(models.Model):
@@ -32,6 +32,10 @@ class Expense(models.Model):
     def __str__(self):
         return f'{self.date} {self.name} {self.amount}'
 
+    # @property
+    # def total_amount_spent(self):
+    #     return int(sum(list(Expense.objects.values_list('amount', flat=True))))
+
     @property
-    def total_amount_spent(self):
-        return int(sum(list(Expense.objects.values_list('amount', flat=True))))
+    def replaced_date(self):
+        return self.date.replace(day=1)
